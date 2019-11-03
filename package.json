@@ -1,0 +1,63 @@
+{
+  "name": "atomilog",
+  "description": "Tiny typed logging library, optimized for AWS Lambda.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Rocky Warren",
+    "url": "https://www.rocky.dev"
+  },
+  "homepage": "https://github.com/therockstorm/atomilog#readme",
+  "bugs": {
+    "url": "https://github.com/therockstorm/atomilog/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/therockstorm/atomilog.git"
+  },
+  "keywords": [
+    "aws-lambda",
+    "log",
+    "logger",
+    "logging",
+    "tools",
+    "typescript"
+  ],
+  "files": [
+    "dist-*/"
+  ],
+  "scripts": {
+    "build": "pika build",
+    "clean": "rm src/*.js* functional.js*; rm -rf pkg; mkdir -p pkg",
+    "format": "skripts format",
+    "lint": "skripts lint",
+    "publish": "pika publish",
+    "start": "tsc && node functional.js",
+    "test": "skripts test --passWithNoTests",
+    "version": "npm run build"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.7.0",
+    "@pika/plugin-ts-standard-pkg": "^0.7.0",
+    "eslint": "^6.5.1",
+    "husky": "^3.0.9",
+    "skripts": "0.2.2",
+    "typescript": "^3.6.4"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "skripts pre-commit"
+    }
+  }
+}
