@@ -16,16 +16,27 @@ npm install atomilog --save
 ## Usage
 
 ```javascript
-import { addFields, debug, error, info, warn } from "atomilog"
-import { name } from "./package.json"
+import { Atomilog } from "atomilog"
 
-// Add fields logged in each message
-addFields({ project: name, prettify: true })
+// Create log
+const log = new Atomilog({
+  options: {
+    prettify: true // Pretty print logs for use in development
+  },
+  // Fields logged in each message
+  fields: {
+    some: "value"
+  }
+})
 
-debug("Hello, debug.")
-info("Hello, info.", { some: { nested: "value " } })
-warn("Hello, warn.", { different: "value" })
-error("Hello, error.", new Error("boom"))
+log.debug("Hello, debug.")
+
+// Add new fields logged in each message
+log.addFields({ requestId: "my-id" })
+
+log.info("Hello, info.", { different: { nested: "value " } })
+log.warn("Hello, warn.")
+log.error("Hello, error.", new Error("boom"))
 ```
 
 ## Developing

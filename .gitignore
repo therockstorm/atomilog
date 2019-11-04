@@ -7,5 +7,6 @@ functional.*
 .serverless/
 .vscode/
 .webpack/
-node_modules/
 coverage/
+node_modules/
+pkg/
