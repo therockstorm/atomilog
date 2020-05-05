@@ -1,7 +1,6 @@
 .DS_Store
 src/*.js
 src/*.map
-functional.*
 
 .idea/
 .serverless/

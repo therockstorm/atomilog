@@ -28,11 +28,10 @@
   ],
   "scripts": {
     "build": "pika build",
-    "clean": "rm src/*.js* functional.js*; rm -rf pkg; mkdir -p pkg",
+    "clean": "rm src/*.js*; rm -rf pkg; mkdir -p pkg",
     "format": "skripts format",
     "lint": "skripts lint",
-    "publish": "pika publish",
-    "start": "tsc && node functional.js",
+    "pub": "pika publish",
     "test": "skripts test --passWithNoTests",
     "version": "npm run build"
   },
@@ -40,10 +39,10 @@
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.9.2",
     "@pika/plugin-ts-standard-pkg": "^0.9.2",
-    "eslint": "^6.7.1",
-    "husky": "^4.0.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
     "skripts": "0.5.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.8.3"
   },
   "@pika/pack": {
     "pipeline": [

@@ -21,12 +21,12 @@ import { Atomilog } from "atomilog"
 // Create log
 const log = new Atomilog({
   options: {
-    prettify: true // Pretty print logs for use in development
+    prettify: true, // Pretty print logs for use in development
   },
   // Fields logged in each message
   fields: {
-    some: "value"
-  }
+    some: "value",
+  },
 })
 
 log.debug("Hello, debug.")

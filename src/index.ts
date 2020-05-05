@@ -1,24 +1,24 @@
-export type Field = boolean | string | number | object | undefined
-export type Fields = { [key: string]: Field }
+export type Field = boolean | string | number | object | undefined | unknown
+export type Fields = { [key: string]: Field } | object
 export enum LogLevel {
   DEBUG = 0,
   INFO = 1,
   WARN = 2,
-  ERROR = 3
+  ERROR = 3,
 }
 interface Options {
   prettify: boolean
 }
-type CtorReq = { options: Options; fields: Fields }
+type CtorReq = { options?: Options; fields?: Fields }
 
 export class Atomilog {
-  private options: Options
-  private fields: Fields
+  private options?: Options
+  private fields?: Fields
 
   constructor(
     { options, fields }: CtorReq = {
       options: { prettify: false },
-      fields: {}
+      fields: {},
     }
   ) {
     this.options = options
@@ -40,7 +40,7 @@ export class Atomilog {
   public addFields = (fields: Fields): void => {
     this.fields = {
       ...this.fields,
-      ...fields
+      ...fields,
     }
   }
 
@@ -58,8 +58,8 @@ export class Atomilog {
     args?: Fields | Error
   ): void => {
     const isEnabled = (level: LogLevel): boolean =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       level >=
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ((LogLevel as any)[process.env.LOG_LEVEL || ""] || LogLevel.DEBUG)
 
     const parseError = (err: Error): Fields => {
@@ -70,7 +70,7 @@ export class Atomilog {
       return {
         errorMessage: msg,
         errorStack: stack,
-        errorFields: Object.keys(err).length ? err : undefined
+        errorFields: Object.keys(err).length ? err : undefined,
       }
     }
 
@@ -80,9 +80,9 @@ export class Atomilog {
       level: LogLevel[level],
       message,
       ...this.fields,
-      ...(args instanceof Error ? parseError(args) : args || {})
+      ...(args instanceof Error ? parseError(args) : args || {}),
     }
 
-    console.log(JSON.stringify(msg, null, this.options.prettify ? 2 : 0))
+    console.log(JSON.stringify(msg, null, this.options?.prettify ? 2 : 0))
   }
 }
